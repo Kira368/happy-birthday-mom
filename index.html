@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>С Днём Рождения, Мама!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 95%;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        h1 {
+            color: #d23669;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+
+        .heart {
+            color: #ff4757;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        .music-control {
+            margin-top: 15px;
+            background-color: #d23669;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            width: 80%;
+            max-width: 250px;
+        }
+
+        .music-control:hover {
+            background-color: #a71d4e;
+            transform: scale(1.05);
+        }
+
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #d23669;
+            margin: 15px auto;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wishes {
+            background-color: #f8e8e8;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .wishes h2 {
+            color: #d23669;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+
+        .wishes ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .wishes li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            margin: 15px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container h3 {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        /* Стили для мини-игры */
+        .game-container {
+            background-color: #f0f8ff;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .game-title {
+            color: #d23669;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .game-field {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .game-flower {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-flower:hover {
+            transform: scale(1.2);
+        }
+
+        .game-score {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #d23669;
+            margin: 5px 0;
+        }
+
+        .game-button {
+            background-color: #d23669;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .game-button:hover {
+            background-color: #a71d4e;
+        }
+
+        /* Адаптация для очень маленьких экранов */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .photo-frame {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .video-container iframe {
+                height: 180px;
+            }
+            
+            .game-flower {
+                font-size: 1.3rem;
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Анимация при загрузке */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flowers" id="flowers"></div>
+        
+        <h1>Дорогая Мама! <span class="heart">❤️</span></h1>
+        
+        <div class="photo-frame">
+            <!-- Замените src на путь к фото мамы -->
+            <img src="img/p1.png" alt="Фото мамы">
+        </div>
+        
+        <p>С Днём Рождения тебя, самая любимая, самая добрая и самая прекрасная мама на свете!</p>
+        <p>Ты — самое дорогое, что у меня есть. Спасибо за твою любовь, заботу и поддержку во всём.</p>
+        <p>Пусть в твоей жизни будет много счастья, здоровья, радости и улыбок! Ты заслуживаешь только самого лучшего!</p>
+        <p>Люблю тебя больше жизни! <span class="heart">❤️</span></p>
+
+        <div class="wishes">
+            <h2>Мои пожелания для тебя:</h2>
+            <ul>
+                <li>Крепкого здоровья и бодрости духа!</li>
+                <li>Больше поводов для радости и улыбок!</li>
+                <li>Исполнения самых заветных желаний!</li>
+                <li>Тепла, уюта и гармонии в доме!</li>
+                <li>Путешествий и приятных впечатлений!</li>
+                <li>Любви, внимания и заботы от близких!</li>
+                <li>Удачи во всех начинаниях!</li>
+            </ul>
+        </div>
+
+        <!-- Мини-игра "Собери букет" -->
+        <div class="game-container">
+            <h2 class="game-title">💐 Собери букет для мамы! 💐</h2>
+            <p>Нажимай на цветы, чтобы набрать очки:</p>
+            <div class="game-field" id="gameField"></div>
+            <p class="game-score">Очки: <span id="score">0</span></p>
+            <button class="game-button" onclick="resetGame()">Начать заново</button>
+        </div>
+
+        <div class="video-container">
+            <h3>Немного милоты для настроения 🐶</h3>
+            <!-- Можно заменить на своё видео -->
+            <iframe width="1250" height="703" src="https://www.youtube.com/embed/n3jonQkufAk" title="С ДНЁМ РОЖДЕНИЯ, МАМА! 💐Красивое Поздравление для Мамы с Днём Рождения" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="mama.mp3" type="audio/mp3">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        // Создаем цветы для фона
+        const flowersContainer = document.getElementById('flowers');
+        const flowerSymbols = ['🌸', '🌹', '🌺', '🌻', '🌼', '🌷', '💐', '🏵️'];
+        
+        for (let i = 0; i < 15; i++) {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.top = Math.random() * 100 + 'vh';
+            flower.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            flower.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            flower.style.animationDelay = Math.random() * 5 + 's';
+            flowersContainer.appendChild(flower);
+        }
+
+
+        // Мини-игра "Собери букет"
+        const gameField = document.getElementById('gameField');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+        const gameFlowers = ['🌹', '🌷', '🌸', '🌺', '🌻', '💐', '🏵️'];
+
+        // Создаем цветы для игры
+        function createFlowers() {
+            gameField.innerHTML = '';
+            for (let i = 0; i < 9; i++) { // Уменьшил количество цветов для мобильных
+                const flower = document.createElement('div');
+                flower.className = 'game-flower';
+                flower.innerHTML = gameFlowers[Math.floor(Math.random() * gameFlowers.length)];
+                flower.onclick = () => collectFlower(flower);
+                gameField.appendChild(flower);
+            }
+        }
+
+        // Сбор цветка
+        function collectFlower(flower) {
+            flower.style.transform = 'scale(0)';
+            setTimeout(() => {
+                flower.innerHTML = gameFlowers[Math.floor(Math.random() * gameFlowers.length)];
+                flower.style.transform = 'scale(1)';
+            }, 300);
+            score++;
+            scoreElement.textContent = score;
+            
+            // Вибрация при клике (если поддерживается)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        // Сброс игры
+        function resetGame() {
+            score = 0;
+            scoreElement.textContent = score;
+            createFlowers();
+        }
+
+        // Запускаем игру при загрузке
+        createFlowers();
+        
+        // Оптимизация для touch-устройств
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
